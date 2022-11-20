@@ -199,6 +199,7 @@ const option4 = document.querySelector('#option4');
 const submit = document.querySelector('#submit');
 
 var answers = Array.from (document.getElementsByName("answer"));
+
 console.log(answers);
 
 let questionCount =0;
@@ -221,6 +222,7 @@ function loadQuestion(){
     answers[3].value  = questionList.d;
 
 
+
 }
 
 loadQuestion();
@@ -232,8 +234,6 @@ loadQuestion();
     answers.forEach(
         function(curAnsElem){
             if(curAnsElem.checked ) {
-                
-
                 userAnswer = curAnsElem.value;
                 console.log(curAnsElem.value);
               
@@ -263,15 +263,27 @@ loadQuestion();
 }
 
 function deselect(){
+
     answers.forEach(function(curAnsElem){
         curAnsElem.checked = false ;
+        submit.setAttribute("disabled","true");
+        finish.setAttribute("disabled","true");
     })
+
+}
+function showbutton(){
+   
+    submit.removeAttribute("disabled");
+    finish.removeAttribute("disabled");
 
 }
 
 
-submit.addEventListener('click', function () {
 
+
+
+submit.addEventListener('click', function () {
+    
        getCheckAnswer();
 /*      console.log(checkedAnswer);
  */    if(answer){
@@ -288,6 +300,7 @@ submit.addEventListener('click', function () {
         
         loadQuestion();
 
+
     }
     else if(questionCount == questoins.length-1){
                 loadQuestion();
@@ -298,11 +311,12 @@ submit.addEventListener('click', function () {
  */       /* location.href="sth.html"; */
             let finish= document.querySelector('#finish');
             
-
+     
             finish.style.display="block";
             finish.addEventListener('click',function (){
                 const questionList = questoins[questionCount];
                 let userAnswer ;
+                deselect();
                 answers.forEach(
                     function(curAnsElem){
                         if(curAnsElem.checked ) {

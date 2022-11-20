@@ -198,9 +198,18 @@ loadQuestion();
 }
 
 function deselect(){
+
     answers.forEach(function(curAnsElem){
         curAnsElem.checked = false ;
+        submit.setAttribute("disabled","true");
+        finish.setAttribute("disabled","true");
     })
+
+}
+function showbutton(){
+   
+    submit.removeAttribute("disabled");
+    finish.removeAttribute("disabled");
 
 }
 
@@ -238,6 +247,7 @@ submit.addEventListener('click', function () {
             finish.addEventListener('click',function (){
                 const questionList = questoins[questionCount];
                 let userAnswer ;
+                deselect();
                 answers.forEach(
                     function(curAnsElem){
                         if(curAnsElem.checked ) {
